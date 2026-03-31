@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>dk Quest</title>
+</head>
+<body style="text-align:center; font-family:Arial; margin-top:100px;">
+
+<h1>dk Quest</h1>
+
+<div id="login">
+  <h2>Digite a senha</h2>
+  <input type="password" id="senha">
+  <br><br>
+  <button onclick="entrar()">Entrar</button>
+</div>
+
+<div id="pergunta" style="display:none;">
+  <h2>cê me ama?</h2>
+  <button onclick="respostaSim()">Sim</button>
+  <button id="nao">Não</button>
+</div>
+
+<div id="sim" style="display:none;">
+  <h2>eu tbm te amooo muitooo ❤️</h2>
+  <br>
+  <button onclick="proximaPergunta()">Próxima</button>
+</div>
+
+<div id="namoro" style="display:none;">
+  <h2>cê quer namorar com eu?</h2>
+  <button onclick="respostaNamoroSim()">Sim</button>
+  <button onclick="respostaNamoroNao()">Não</button>
+</div>
+
+<div id="aee" style="display:none;">
+  <h2>aee</h2>
+</div>
+
+<div id="naoTela" style="display:none;">
+  <h2>a n esperava essa resposta 😐</h2>
+</div>
+
+<div id="naoEscolha" style="display:none;">
+  <h2>você não tem escolha 😑</h2>
+</div>
+
+<script>
+let fugas = 5;
+const botaoNao = document.getElementById("nao");
+
+function entrar() {
+  let senha = document.getElementById("senha").value.toLowerCase();
+  if (senha === "dk te ama") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("pergunta").style.display = "block";
+  } else {
+    alert("Senha incorreta");
+  }
+}
+
+botaoNao.addEventListener("mouseover", () => {
+  if (fugas > 0) {
+    let x = Math.random() * (window.innerWidth - botaoNao.offsetWidth);
+    let y = Math.random() * (window.innerHeight - botaoNao.offsetHeight);
+    botaoNao.style.position = "absolute";
+    botaoNao.style.left = x + "px";
+    botaoNao.style.top = y + "px";
+    fugas--;
+  }
+});
+
+botaoNao.addEventListener("click", () => {
+  document.getElementById("pergunta").style.display = "none";
+  document.getElementById("naoTela").style.display = "block";
+});
+
+function respostaSim() {
+  // Mostra tela "eu tbm te amooo muitooo ❤️" ao clicar Sim
+  document.getElementById("pergunta").style.display = "none";
+  document.getElementById("sim").style.display = "block";
+}
+
+function proximaPergunta() {
+  // Vai pra segunda pergunta
+  document.getElementById("sim").style.display = "none";
+  document.getElementById("namoro").style.display = "block";
+}
+
+function respostaNao() {
+  document.getElementById("pergunta").style.display = "none";
+  document.getElementById("naoTela").style.display = "block";
+}
+
+// Segunda pergunta: quer namorar
+function respostaNamoroSim() {
+  document.getElementById("namoro").style.display = "none";
+  document.getElementById("aee").style.display = "block";
+}
+
+function respostaNamoroNao() {
+  document.getElementById("namoro").style.display = "none";
+  document.getElementById("naoEscolha").style.display = "block";
+
+  // Depois de 2 segundos, volta pra pergunta "cê quer namorar com eu?"
+  setTimeout(() => {
+    document.getElementById("naoEscolha").style.display = "none";
+    document.getElementById("namoro").style.display = "block";
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
